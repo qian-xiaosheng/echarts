@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts图表</title>
+</head>
+
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 600px;height:400px;"></div>
+</body>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript">
+    // 初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        //图表标题
+        title: {
+            text: '我的第一个 ECharts 实例',//主标题
+            x:'left',// 水平安放位置，默认为左对齐，可选为：'center' ¦ 'left' ¦ 'right'
+            y:'top',// 垂直安放位置，默认为全图顶端，可选为：'top' ¦ 'bottom' ¦ 'center'¦ 10（y坐标，单位px）
+            backgroundColor: 'yellow',//标题背景色
+            borderColor: 'orange',// 标题边框颜色
+            borderWidth: 1,// 标题边框线宽，单位px，默认为0（无边框）
+            padding: 5,// 标题内边距，单位px，默认各方向内边距为5
+            itemGap: 10,// 主副标题纵向间隔，单位px，默认为10
+            textStyle: {//主标题css样式
+                fontSize: 18,//主标题文字大小
+                fontWeight: 'bolder',//主标题方字粗细
+                color: 'blue'// 主标题文字颜色
+            },
+            subtext: 'hello 宜达',//副标题
+            subtextStyle: {//副标题css样式
+                fontSize: 14,//副标题文字大小
+                fontWeight: 'normal',//副标题方字粗细
+                color: 'red'// 副标题文字颜色
+            }
+        },
+        // 提示框
+        tooltip: {
+            trigger: 'item',           // 触发类型，默认数据触发，见下图，可选为：'item' ¦ 'axis'
+            showDelay: 20,             // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+            hideDelay: 100,            // 隐藏延迟，单位ms
+            transitionDuration : 0.4,  // 动画变换时间，单位s
+            backgroundColor: 'yellow', // 提示背景颜色，默认为透明度为0.7的黑色
+            borderColor: 'blue',        // 提示边框颜色
+            borderRadius: 4,           // 提示边框圆角，单位px，默认为4
+            borderWidth: 1,            // 提示边框线宽，单位px，默认为0（无边框）
+            padding: 5,                // 提示内边距，单位px，默认各方向内边距为5
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效，当触发类型为'axis'时生效
+                type : 'shadow',       // 默认为直线，可选为：'line' | 'shadow'
+                lineStyle : {          // 直线指示器样式设置，type为'line'生效
+                    color: 'ornage',
+                    width: 1,
+                    type: 'solid'
+                },
+                shadowStyle : {                    // 阴影指示器样式设置，type为'shadow'生效
+                    width: 'auto',                 // 阴影大小
+                    color: 'rgba(150,150,150,0.3)' // 阴影颜色
+                }
+            },
+            textStyle: {
+                color: 'red',
+                fontSize: 12,//文字大小
+                fontWeight: 'normal',//粗细
+            }
+        },
+        // 图例
+        /*legend: {
+            data: ['销量'],
+            //以下属性均可选
+            orient: 'horizontal',// 布局方式，默认为水平布局，可选为：'horizontal' ¦ 'vertical'
+            x: 'center',// 水平安放位置，默认为全图居中，可选为:'center' ¦ 'left' ¦ 'right'
+            y: 'top',// 垂直安放位置，默认为全图顶端，可选为：'top' ¦ 'bottom' ¦ 'center'
+            backgroundColor: 'yellow',// 图例背景色
+            borderColor: 'orange', // 图例边框颜色
+            borderWidth: 1, // 图例边框线宽，单位px，默认为0（无边框）
+            padding: 5,// 图例内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，同css
+            itemGap: 10,// 各个item之间的间隔，单位px，默认为10，横向布局时为水平间隔，纵向布局时为纵向间隔
+            itemWidth: 20,// 图例图形宽度
+            itemHeight: 10,// 图例图形高度
+            textStyle: {
+                color: 'blue',// 图例文字颜色
+                fontSize: 12,//文字大小
+                fontWeight: 'normal',//粗细
+            }
+        },*/
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 45, 36, 90, 121, 161]
+        }],
+        // 值域
+        /*dataRange: {
+            orient: 'horizontal',      // 布局方式，默认为垂直布局，可选为：'horizontal' ¦ 'vertical'
+            x:'center',                 // 水平安放位置，默认为全图左对齐，可选为：'center' ¦ 'left' ¦ 'right' ¦ 20（x坐标，单位px）
+            y: 'bottom',               // 垂直安放位置，默认为全图底部，可选为：'top' ¦ 'bottom' ¦ 'center' ¦ 360（y坐标，单位px）
+            backgroundColor: 'yellow', //值域背景色
+            borderColor: 'orange',     // 值域边框颜色
+            borderWidth: 1,            // 值域边框线宽，单位px，默认为0（无边框）
+            padding: 5,                // 值域内边距，单位px，默认各方向内边距为5
+            itemGap: 10,               // 各个item之间的间隔，单位px，默认为10，横向布局时为水平间隔，纵向布局时为纵向间隔
+            itemWidth:20,             // 值域图形宽度，线性渐变水平布局宽度为该值 * 10
+            itemHeight: 14,            // 值域图形高度，线性渐变垂直布局高度为该值 * 10
+            splitNumber: 5,            // 分割段数，默认为5，为0时为线性渐变
+            color:['blue','pink'],//颜色
+            //text:['高','低'],         // 文本，默认为数值文本
+            textStyle: {
+                color: 'brown',          // 值域文字颜色
+                fontSize: 12,//文字大小
+                fontWeight: 'normal'//粗细
+            }
+        }*/
+
+        // 网格
+        grid: {
+            x: 50,//左边x轴离左边界50px
+            y: 60,//上边y轴离顶部边界60px
+            x2: 50,//右边x轴离右边界50px
+            y2: 60//下边y轴离底部边界60px
+        },
+    };
+
+    // 使用刚指定的配置项和数据显示图表
+    myChart.setOption(option);
+</script>
+
+</html>
